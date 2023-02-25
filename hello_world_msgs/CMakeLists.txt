@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(hello_world_msgs)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -13,9 +13,11 @@ find_package(std_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
-rosidl_generate_interfaces(${PROJECT_NAME}
+file(GLOB action_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} action/*.action)
+
+rosidl_generate_interfaces(${PROJECT_NAME} ${action_files}
   "srv/SetMessage.srv"
-#  "action/Fibonacci.action"
+  # "action/Fibonacci.action"
   DEPENDENCIES std_msgs action_msgs
 )
 
