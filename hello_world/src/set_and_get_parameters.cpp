@@ -12,9 +12,9 @@ int main(int argc, char * argv[])
     auto node = rclcpp::Node::make_shared("set_and_get_parameters");
 
     // パラメータの宣言
-    node->declare_parameter("foo");
-    node->declare_parameter("bar");
-    node->declare_parameter("baz");
+    node->declare_parameter("foo", 0);
+    node->declare_parameter("bar", "");
+    node->declare_parameter("baz", 0.);
 
     // パラメータ設定・取得サービスのクライアント
     auto parameters_client = std::make_shared<rclcpp::SyncParametersClient>(node);
